@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring, useReducedMotion, useInView } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { EyeOff, FileText, Shield, Trash2, ArrowRight } from 'lucide-react';
 import GlassNavbar from '../components/GlassNavbar';

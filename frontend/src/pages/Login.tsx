@@ -8,7 +8,7 @@ import './Auth.css';
 
 const pageVariants = {
   initial: { opacity: 0, y: 20, scale: 0.98 },
-  animate: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 200, damping: 25 } },
+  animate: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring' as const, stiffness: 200, damping: 25 } },
   exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
 };
 

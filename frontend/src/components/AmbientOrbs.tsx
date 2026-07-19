@@ -35,7 +35,7 @@ const AmbientOrbs: React.FC<AmbientOrbsProps> = ({ intensity = 1 }) => {
           duration: dur,
           repeat: Infinity,
           repeatType: 'reverse' as const,
-          ease: 'easeInOut',
+          ease: 'easeInOut' as const,
         };
 
   return (

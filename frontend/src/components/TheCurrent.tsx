@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useMemo } from 'react';
-import { motion, useSpring, useReducedMotion, useMotionValue, useTransform } from 'framer-motion';
+import { motion, useSpring, useReducedMotion } from 'framer-motion';
 import './TheCurrent.css';
 
 interface TheCurrentProps {
@@ -69,7 +69,6 @@ const TheCurrent: React.FC<TheCurrentProps> = ({
 
   const aWins = valueA < valueB;
   const bWins = valueB < valueA;
-  const tied = valueA === valueB;
 
   // Dimensions based on mode
   const dims = useMemo(() => {

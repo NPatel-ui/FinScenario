@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/AuthContext';
 
@@ -49,7 +49,6 @@ const GlassNavbar: React.FC<GlassNavbarProps> = ({
   const blurAmount = 12 + scrollProgress * 12;
   const bgOpacity = 0.4 + scrollProgress * 0.3;
   const paddingH = 32 - scrollProgress * 8;
-  const marginH = 24 + scrollProgress * 0;
 
   return (
     <motion.nav
