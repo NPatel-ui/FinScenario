@@ -1,0 +1,13 @@
+fastapi[standard]
+uvicorn[standard]
+python-multipart
+firebase-admin
+google-generativeai
+pandas
+numpy
+scikit-learn
+matplotlib
+openpyxl
+python-dotenv
+pydantic
+pydantic-settings
