@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 annotated-doc==0.0.4
 annotated-types==0.7.0
 anyio==4.14.2
@@ -39,3 +40,18 @@ websockets==16.1
 sqlalchemy
 alembic
 asyncpg
+=======
+fastapi[standard]
+uvicorn[standard]
+python-multipart
+firebase-admin
+google-generativeai
+pandas
+numpy
+scikit-learn
+matplotlib
+openpyxl
+python-dotenv
+pydantic
+pydantic-settings
+>>>>>>> 782f944026ff525c1903b0916d71626156c02c0b
