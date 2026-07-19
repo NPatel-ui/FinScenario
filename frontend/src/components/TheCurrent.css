@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════════════════════════════
+   TheCurrent — Liquid tube comparison component
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Interactive (Hero) ────────────────────────────────────── */
+.current-interactive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.current-tubes-wrapper {
+  position: relative;
+}
+
+.current-svg {
+  display: block;
+  overflow: visible;
+}
+
+.current-labels {
+  display: flex;
+  gap: var(--space-8);
+  justify-content: center;
+}
+
+.current-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 80px;
+}
+
+.current-label-name {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+}
+
+.current-label-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.label-winner .current-label-name {
+  color: var(--teal);
+}
+
+.label-winner .current-label-value {
+  color: var(--teal);
+}
+
+.label-loser .current-label-value {
+  color: var(--coral);
+  opacity: 0.7;
+}
+
+/* ── Compact ───────────────────────────────────────────────── */
+.current-compact {
+  display: inline-flex;
+  align-items: flex-end;
+}
+
+.current-compact-tubes {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+}
+
+.current-compact-tube {
+  width: 8px;
+  background: rgba(21, 22, 43, 0.05);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.current-compact-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 4px;
+  transition: height 0.5s var(--ease-spring);
+}
+
+.fill-teal {
+  background: var(--teal);
+  box-shadow: 0 0 6px rgba(0, 194, 168, 0.3);
+}
+
+.fill-coral {
+  background: var(--coral);
+  opacity: 0.5;
+}
+
+.fill-neutral {
+  background: var(--ink);
+  opacity: 0.15;
+}
+
+/* ── Ambient (Thinking) ────────────────────────────────────── */
+.current-ambient {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2);
+}
+
+.current-ambient svg {
+  display: block;
+}

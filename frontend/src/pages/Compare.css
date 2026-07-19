@@ -1,0 +1,110 @@
+/* ═══════════════════════════════════════════════════════════════
+   Compare Scenarios — Side-by-side glass panels
+   ═══════════════════════════════════════════════════════════════ */
+
+.compare-page {
+  min-height: 100vh;
+  background: var(--cloud);
+}
+
+.compare-nav {
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-6);
+  margin: var(--space-4) var(--space-6) 0;
+  border-radius: var(--radius-pill);
+  max-width: 200px;
+}
+
+.compare-main {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-16);
+}
+
+.compare-main h1 {
+  margin-bottom: var(--space-1);
+}
+
+.compare-selectors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+@media (max-width: 768px) {
+  .compare-selectors {
+    grid-template-columns: 1fr;
+  }
+}
+
+.compare-select-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.compare-select {
+  width: 100%;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid var(--ink-faint);
+  color: var(--ink);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  border-radius: var(--radius-md);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.compare-select:focus {
+  border-color: rgba(255, 182, 72, 0.5);
+}
+
+.compare-columns {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .compare-columns {
+    grid-template-columns: 1fr;
+  }
+  .compare-divider {
+    display: none;
+  }
+}
+
+.compare-col {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.compare-current {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4) 0;
+}
+
+.compare-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compare-summary {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.compare-empty {
+  text-align: center;
+  padding: var(--space-8);
+  opacity: 0.5;
+}

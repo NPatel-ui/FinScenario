@@ -1,0 +1,285 @@
+/* ═══════════════════════════════════════════════════════════════
+   ScenarioChat — Glass chat + results workspace
+   ═══════════════════════════════════════════════════════════════ */
+
+.scenario-page {
+  height: 100vh;
+  background: var(--cloud);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 32px; /* Keep everything away from the screen edges */
+  gap: 40px; /* Massive gap between the top nav and the bottom panels */
+}
+
+.scenario-header {
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.scenario-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Nav ────────────────────────────────────────────────────── */
+.scenario-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-pill);
+}
+
+.nav-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* ── Layout ────────────────────────────────────────────────── */
+.scenario-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Make both boxes same width */
+  gap: 32px; /* Gap between the two boxes */
+  flex: 1;
+  min-height: 0;
+}
+
+@media (max-width: 1024px) {
+  .scenario-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Chat Pane ─────────────────────────────────────────────── */
+.chat-pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: var(--space-4);
+}
+
+.chat-history {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  /* Smooth scroll fade effect at top and bottom */
+  mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+}
+
+.message {
+  display: flex;
+  max-width: 85%;
+}
+
+.message.user {
+  align-self: flex-end;
+}
+
+.message.assistant {
+  align-self: flex-start;
+}
+
+.message-bubble {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.message.assistant .message-bubble {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--glass-border);
+}
+
+.message.user .message-bubble {
+  background: rgba(21, 22, 43, 0.06);
+  border: 1px solid rgba(21, 22, 43, 0.08);
+}
+
+.thinking-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-4);
+  min-height: 56px;
+}
+
+/* ── Chat Input ────────────────────────────────────────────── */
+.chat-input-form {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) 0 0;
+  border-top: 1px solid var(--ink-faint);
+}
+
+.chat-input {
+  flex: 1;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid var(--ink-faint);
+  color: var(--ink);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  border-radius: var(--radius-pill);
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.chat-input::placeholder {
+  color: var(--ink-muted);
+}
+
+.chat-input:focus {
+  border-color: rgba(255, 182, 72, 0.5);
+  box-shadow: 0 0 0 3px var(--amber-muted);
+}
+
+.send-btn {
+  padding: var(--space-3);
+  min-width: 44px;
+}
+
+/* ── Results Pane ──────────────────────────────────────────── */
+.results-pane {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.results-card {
+  flex: 1; /* Stretch to fill exactly the same height as chat-pane */
+  overflow-y: auto;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.results-card h3 {
+  margin-top: var(--space-1);
+}
+
+.results-current {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4) 0;
+}
+
+.results-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.results-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.metric-box {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.metric-winner {
+  background: var(--teal-muted);
+}
+
+.metric-loser {
+  background: var(--coral-muted);
+}
+
+.metric-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+}
+
+.metric-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.metric-winner .metric-value {
+  color: var(--teal);
+}
+
+.metric-loser .metric-value {
+  color: var(--coral);
+}
+
+.summary-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--ink);
+  opacity: 0.8;
+}
+
+/* ── Assumptions ───────────────────────────────────────────── */
+.assumptions-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.assumptions-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.assumptions-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 0.85rem;
+}
+
+.assumption-name {
+  font-family: var(--font-body);
+  color: var(--ink-muted);
+  flex: 1;
+}
+
+.assumption-value {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.citation-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  background: var(--teal-muted);
+  color: var(--teal);
+}
+
+.empty-results {
+  text-align: center;
+  padding: var(--space-8);
+}
+
+.empty-results p {
+  opacity: 0.5;
+}

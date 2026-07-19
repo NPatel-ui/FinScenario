@@ -1,0 +1,234 @@
+/* ═══════════════════════════════════════════════════════════════
+   Onboarding Wizard — Glass morphing panel
+   ═══════════════════════════════════════════════════════════════ */
+
+.onboarding-page {
+  min-height: 100vh;
+  position: relative;
+  background: var(--cloud);
+  padding: var(--space-6);
+}
+
+.wizard-container {
+  width: 100%;
+  max-width: 560px;
+  padding: var(--space-8);
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+}
+
+/* ── Progress Dots ─────────────────────────────────────────── */
+.progress-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: var(--space-8);
+}
+
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  transition: all 0.3s var(--ease-spring);
+}
+
+.progress-dot.filled {
+  background: var(--teal);
+}
+
+.progress-dot.current {
+  box-shadow: 0 0 8px rgba(0, 194, 168, 0.4);
+}
+
+/* ── Wizard Body & Steps ───────────────────────────────────── */
+.wizard-body {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-wrapper {
+  width: 100%;
+}
+
+.wizard-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.wizard-content.center-text {
+  text-align: center;
+  align-items: center;
+}
+
+.wizard-content h2 {
+  font-size: 1.6rem;
+  color: var(--ink);
+}
+
+.wizard-content p {
+  font-size: 0.95rem;
+}
+
+.sub-label {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  opacity: 1 !important;
+}
+
+.wizard-input-wrap {
+  max-width: 360px;
+}
+
+/* ── Chip Grid ─────────────────────────────────────────────── */
+.chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* ── Risk Slider ───────────────────────────────────────────── */
+.slider-container {
+  margin-top: var(--space-6);
+  padding: 0 var(--space-4);
+}
+
+.risk-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--coral), var(--amber), var(--teal));
+  outline: none;
+  cursor: pointer;
+}
+
+.risk-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--ink);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: transform 0.15s var(--ease-spring), box-shadow 0.15s ease;
+}
+
+.risk-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: var(--shadow-lg), var(--shadow-glow-amber);
+}
+
+.risk-slider::-webkit-slider-thumb:active {
+  box-shadow: var(--shadow-lg), 0 0 16px rgba(255, 182, 72, 0.4);
+}
+
+.risk-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--ink);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-3);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.slider-labels span.active {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── Toggle List ───────────────────────────────────────────── */
+.toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  background: var(--glass);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--ink-faint);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+  transition: background var(--transition-fast);
+}
+
+.toggle-row:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.toggle-input {
+  width: 40px;
+  height: 22px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--ink-faint);
+  border-radius: 11px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.toggle-input::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s var(--ease-spring);
+}
+
+.toggle-input:checked {
+  background: var(--teal);
+}
+
+.toggle-input:checked::after {
+  transform: translateX(18px);
+}
+
+/* ── Completion Screen ─────────────────────────────────────── */
+.completion-screen {
+  padding: var(--space-4) 0;
+}
+
+.completion-current {
+  margin-bottom: var(--space-6);
+}
+
+/* ── Footer Navigation ─────────────────────────────────────── */
+.wizard-footer {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-8);
+  gap: var(--space-4);
+}

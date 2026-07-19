@@ -1,0 +1,190 @@
+/* ═══════════════════════════════════════════════════════════════
+   Dashboard — Glass panels, bento grid
+   ═══════════════════════════════════════════════════════════════ */
+
+.dashboard-page {
+  min-height: 100vh;
+  background: var(--cloud);
+}
+
+.dash-main {
+  padding-top: calc(80px + var(--space-8));
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.dash-header {
+  margin-bottom: var(--space-8);
+}
+
+.dash-header h1 {
+  margin-bottom: var(--space-2);
+}
+
+/* ── New Scenario Tiles ────────────────────────────────────── */
+.new-scenario-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.scenario-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .scenario-tiles {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scenario-tile {
+  overflow: hidden;
+}
+
+.tile-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--ink);
+  font-family: var(--font-body);
+  transition: background var(--transition-fast);
+}
+
+.tile-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.tile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--teal-muted);
+  color: var(--teal);
+}
+
+.tile-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: var(--space-2);
+}
+
+.tile-desc {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+/* ── Saved Scenarios ───────────────────────────────────────── */
+.saved-scenarios {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-16);
+}
+
+.scenario-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.row-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.row-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.row-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.row-date {
+  color: var(--ink-muted);
+}
+
+.row-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.row-tag {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--teal-muted);
+}
+
+.row-amount {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ── Empty State ───────────────────────────────────────────── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-12);
+  text-align: center;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+.empty-arrow {
+  font-size: 1.5rem;
+  color: var(--teal);
+}
+
+/* ── Skeleton Loading ──────────────────────────────────────── */
+.scenario-row-skeleton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+}
+
+.skel-bar {
+  height: 14px;
+  border-radius: 7px;
+  background: var(--ink-faint);
+  animation: skel-pulse 1.5s ease-in-out infinite;
+}
+
+.skel-w40 { width: 40%; }
+.skel-w60 { width: 60%; }
+
+@keyframes skel-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}

@@ -1,0 +1,602 @@
+/* ═══════════════════════════════════════════════════════════════
+   FinScenario — "The Current" Design System
+   Global tokens, base styles, and utility classes.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Design Tokens ──────────────────────────────────────── */
+:root {
+  /* Color — "Daylight & Current" */
+  --cloud:       #F8F8FC;
+  --ink:         #15162B;
+  --coral:       #FF6B5B;
+  --teal:        #00C2A8;
+  --amber:       #FFB648;
+  --glass:       rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-strong: rgba(255, 255, 255, 0.72);
+
+  /* Semantic aliases */
+  --coral-muted:  rgba(255, 107, 91, 0.15);
+  --teal-muted:   rgba(0, 194, 168, 0.15);
+  --amber-muted:  rgba(255, 182, 72, 0.15);
+  --ink-muted:    rgba(21, 22, 43, 0.55);
+  --ink-faint:    rgba(21, 22, 43, 0.08);
+
+  /* Typography */
+  --font-display: 'DM Sans', system-ui, sans-serif;
+  --font-body:    'Inter', -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Border Radius — pills and glass panels */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+
+  /* Shadows — soft floating depth */
+  --shadow-sm:    0 1px 3px rgba(21, 22, 43, 0.06), 0 1px 2px rgba(21, 22, 43, 0.04);
+  --shadow-md:    0 4px 16px rgba(21, 22, 43, 0.08), 0 1px 4px rgba(21, 22, 43, 0.04);
+  --shadow-lg:    0 12px 40px rgba(21, 22, 43, 0.10), 0 4px 12px rgba(21, 22, 43, 0.05);
+  --shadow-xl:    0 24px 64px rgba(21, 22, 43, 0.12), 0 8px 24px rgba(21, 22, 43, 0.06);
+  --shadow-glow-teal:  0 0 30px rgba(0, 194, 168, 0.25);
+  --shadow-glow-coral: 0 0 30px rgba(255, 107, 91, 0.20);
+  --shadow-glow-amber: 0 0 20px rgba(255, 182, 72, 0.30);
+
+  /* Motion */
+  --ease-out:      cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-micro:     150ms;
+  --dur-standard:  300ms;
+  --dur-fluid:     550ms;
+
+  /* Transitions */
+  --transition-fast:   150ms var(--ease-out);
+  --transition-normal: 300ms var(--ease-out);
+  --transition-spring: 350ms var(--ease-spring);
+}
+
+/* ── 2. Reduced Motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ambient-orb { display: none !important; }
+  .bubble-particle { display: none !important; }
+}
+
+/* ── 3. Reset & Base ───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--cloud);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--amber);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--coral);
+}
+
+/* ── 4. Typography ─────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 4rem); letter-spacing: -0.03em; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.6rem); letter-spacing: -0.02em; }
+h3 { font-size: 1.4rem; font-weight: 600; }
+h4 { font-size: 1.1rem; font-weight: 600; }
+
+p {
+  font-family: var(--font-body);
+  color: var(--ink);
+  opacity: 0.7;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Force tabular monospaced numerals on all financial figures */
+.mono-nums,
+.tabular-nums {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ── 5. Layout Utilities ───────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  width: 100%;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+
+.w-full { width: 100%; }
+.mt-2 { margin-top: var(--space-2); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-8 { margin-bottom: var(--space-8); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+
+/* ── 6. Glass Panel ────────────────────────────────────────── */
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.glass-panel-strong {
+  background: var(--glass-strong);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── 7. Buttons ────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.8rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  gap: 0.5rem;
+  text-decoration: none;
+  position: relative;
+  line-height: 1;
+  transition: transform var(--dur-micro) var(--ease-spring),
+              box-shadow var(--dur-micro) ease;
+}
+
+/* Primary — ink-filled with animated conic-gradient border */
+.btn-primary {
+  background: var(--ink);
+  color: var(--cloud);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-pill);
+  background: conic-gradient(
+    from var(--conic-angle, 0deg),
+    var(--coral),
+    var(--amber),
+    var(--teal),
+    var(--coral)
+  );
+  z-index: -1;
+  animation: conic-spin 4s linear infinite;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  border-radius: var(--radius-pill);
+  z-index: -1;
+}
+
+.btn-primary:hover:not(:disabled) {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.96);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@keyframes conic-spin {
+  to { --conic-angle: 360deg; }
+}
+
+@property --conic-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Secondary — glass outlined */
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink-faint);
+  backdrop-filter: blur(8px);
+}
+
+.btn-outline:hover {
+  background: var(--ink-faint);
+  border-color: rgba(21, 22, 43, 0.15);
+}
+
+.btn-outline:active {
+  transform: scale(0.97);
+}
+
+/* Ghost */
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  opacity: 0.7;
+}
+
+.btn-ghost:hover {
+  opacity: 1;
+  background: var(--ink-faint);
+}
+
+.btn-ghost:active {
+  transform: scale(0.97);
+}
+
+/* Size modifiers */
+.btn-lg {
+  padding: 0.9rem 2.4rem;
+  font-size: 1.1rem;
+}
+
+.btn-sm {
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* ── 8. Floating Label Inputs ──────────────────────────────── */
+.floating-input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.floating-input-group input,
+.floating-input-group select {
+  width: 100%;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid var(--ink-faint);
+  color: var(--ink);
+  padding: 1.6rem 1rem 0.4rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.floating-input-group input::placeholder {
+  color: transparent;
+}
+
+.floating-input-group label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  pointer-events: none;
+  transition: all 200ms var(--ease-spring);
+  transform-origin: left center;
+}
+
+.floating-input-group input:focus + label,
+.floating-input-group input:not(:placeholder-shown) + label,
+.floating-input-group .label-float {
+  top: 0.35rem;
+  transform: translateY(0) scale(0.75);
+  color: var(--amber);
+  font-weight: 500;
+}
+
+.floating-input-group input:focus {
+  border-color: rgba(255, 182, 72, 0.5);
+  box-shadow: 0 0 0 4px var(--amber-muted);
+}
+
+.floating-input-group input.error {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 4px var(--coral-muted);
+  animation: field-shake 100ms ease-in-out;
+}
+
+.floating-input-group .error-message {
+  font-size: 0.8rem;
+  color: var(--coral);
+  margin-top: var(--space-1);
+  opacity: 0;
+  transform: translateY(-4px);
+  animation: slide-down 200ms var(--ease-out) forwards;
+}
+
+@keyframes field-shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-3px); }
+  75%      { transform: translateX(3px); }
+}
+
+@keyframes slide-down {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── 9. Center-Out Underline Links ─────────────────────────── */
+.link-underline {
+  position: relative;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background: var(--amber);
+  transition: width 0.3s var(--ease-out), left 0.3s var(--ease-out);
+}
+
+.link-underline:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ── 10. Section Labels ────────────────────────────────────── */
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+}
+
+/* ── 11. Semantic Colors ───────────────────────────────────── */
+.text-teal { color: var(--teal); }
+.text-coral { color: var(--coral); }
+.text-amber { color: var(--amber); }
+.text-muted { opacity: 0.55; }
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.75rem; }
+
+/* ── 12. Dividers ──────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--ink-faint);
+  border: none;
+  width: 100%;
+}
+
+.divider-vertical {
+  width: 1px;
+  background: var(--ink-faint);
+  align-self: stretch;
+}
+
+/* ── 13. Scrollbar Styling ─────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(21, 22, 43, 0.12);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(21, 22, 43, 0.25);
+}
+
+/* ── 14. Page-center utility ───────────────────────────────── */
+.page-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: var(--ink);
+}
+
+/* ── 15. SVG Stroke Draw Animation ─────────────────────────── */
+@keyframes stroke-draw {
+  from { stroke-dashoffset: var(--dash-length, 100); }
+  to   { stroke-dashoffset: 0; }
+}
+
+.draw-in {
+  stroke-dasharray: var(--dash-length, 100);
+  stroke-dashoffset: var(--dash-length, 100);
+}
+
+.draw-in.visible {
+  animation: stroke-draw 0.8s var(--ease-out) forwards;
+}
+
+/* ── 16. Ambient Orbs Background ───────────────────────────── */
+.orbs-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  will-change: transform;
+}
+
+.orb-coral {
+  background: var(--coral);
+  width: 500px;
+  height: 500px;
+}
+
+.orb-teal {
+  background: var(--teal);
+  width: 450px;
+  height: 450px;
+}
+
+.orb-amber {
+  background: var(--amber);
+  width: 380px;
+  height: 380px;
+}
+
+/* ── 17. Wordmark ──────────────────────────────────────────── */
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.wordmark:hover {
+  color: var(--ink);
+}
+
+.wordmark-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── 18. Chip / Tag ────────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1.5px solid var(--ink-faint);
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  color: var(--ink);
+  transition: all var(--transition-spring);
+}
+
+.chip:hover {
+  border-color: rgba(21, 22, 43, 0.2);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.chip.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: white;
+  box-shadow: var(--shadow-glow-teal);
+}
+
+/* ── 19. Keyframes ─────────────────────────────────────────── */
+@keyframes float-up {
+  0%   { transform: translateY(0) scale(1); opacity: 0.6; }
+  100% { transform: translateY(-60px) scale(0.5); opacity: 0; }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes bounce-arrow {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}

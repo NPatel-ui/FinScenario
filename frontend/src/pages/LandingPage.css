@@ -1,0 +1,423 @@
+/* ═══════════════════════════════════════════════════════════════
+   LandingPage — "The Current" visual identity
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Page ───────────────────────────────────────────────────── */
+.landing-page {
+  min-height: 100vh;
+  position: relative;
+  background: var(--cloud);
+}
+
+.landing-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Glass Navbar ────────────────────────────────────────────── */
+.glass-navbar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: 1100px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md);
+}
+
+.nav-right {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+/* ── Hero Section ────────────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  padding: calc(var(--space-24) + 60px) var(--space-6) var(--space-16);
+  min-height: 100vh;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--space-8);
+    padding-top: calc(var(--space-16) + 60px);
+    min-height: auto;
+  }
+}
+
+.hero-text {
+  max-width: 560px;
+}
+
+@media (max-width: 960px) {
+  .hero-text { margin: 0 auto; }
+}
+
+.hero-text h1 {
+  color: var(--ink);
+  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  line-height: 1.05;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.25em;
+}
+
+@media (max-width: 960px) {
+  .hero-text h1 {
+    justify-content: center;
+  }
+}
+
+.kinetic-word {
+  display: inline-block;
+}
+
+.hero-sub {
+  margin-top: var(--space-6);
+  font-size: 1.15rem;
+  color: var(--ink);
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 960px) {
+  .hero-actions { justify-content: center; }
+}
+
+.hero-link {
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+}
+
+.hero-demo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .hero-demo { order: -1; }
+}
+
+.hero-demo-card {
+  padding: var(--space-8);
+  width: 100%;
+  max-width: 420px;
+}
+
+.demo-header {
+  margin-bottom: var(--space-6);
+}
+
+.demo-header h3 {
+  margin-top: var(--space-1);
+}
+
+.demo-slider-row {
+  margin-bottom: var(--space-8);
+}
+
+.demo-slider-row label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.demo-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.demo-price {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  min-width: 80px;
+}
+
+.demo-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--coral), var(--amber), var(--teal));
+  outline: none;
+  cursor: pointer;
+}
+
+.demo-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 3px solid var(--cloud);
+  box-shadow: var(--shadow-md), var(--shadow-glow-amber);
+  cursor: pointer;
+  transition: transform 0.15s var(--ease-spring);
+}
+
+.demo-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.demo-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 3px solid var(--cloud);
+  box-shadow: var(--shadow-md), var(--shadow-glow-amber);
+  cursor: pointer;
+}
+
+/* ── Trust Strip ─────────────────────────────────────────────── */
+.trust-strip {
+  border-top: 1px solid var(--ink-faint);
+  border-bottom: 1px solid var(--ink-faint);
+  padding: var(--space-6) 0;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+.trust-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink);
+  opacity: 0.6;
+}
+
+.trust-icon {
+  color: var(--teal);
+  display: flex;
+}
+
+/* ── How It Works — Scroll-Pinned ────────────────────────────── */
+.hiw-section {
+  height: 300vh; /* Scroll height = 3x viewport for smooth scrub */
+  position: relative;
+}
+
+.hiw-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding-top: var(--space-12);
+}
+
+.hiw-sticky h2 {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.hiw-track-wrapper {
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.hiw-track {
+  display: flex;
+  gap: var(--space-8);
+  width: max-content;
+  padding: 0 var(--space-6);
+}
+
+.hiw-slide {
+  width: min(400px, 80vw);
+  flex-shrink: 0;
+}
+
+.hiw-card {
+  padding: var(--space-8);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.hiw-step-num {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--teal);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.hiw-card h3 {
+  margin-top: var(--space-2);
+}
+
+.hiw-card p {
+  font-size: 0.95rem;
+}
+
+/* ── Example Scenarios ───────────────────────────────────────── */
+.examples-section {
+  padding: var(--space-20) var(--space-6);
+}
+
+.examples-section h2 {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 768px) {
+  .examples-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.example-card {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.example-card h4 {
+  font-family: var(--font-display);
+}
+
+.example-current {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-3) 0;
+}
+
+.example-verdict {
+  color: var(--teal) !important;
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 1 !important;
+}
+
+/* ── Privacy Section ─────────────────────────────────────────── */
+.privacy-section {
+  padding: var(--space-16) var(--space-6);
+}
+
+.privacy-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-10);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated gradient border effect */
+.privacy-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-lg);
+  background: conic-gradient(
+    from 0deg,
+    var(--coral),
+    var(--amber),
+    var(--teal),
+    var(--coral)
+  );
+  z-index: -1;
+  animation: conic-spin 6s linear infinite;
+  opacity: 0.4;
+}
+
+.privacy-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glass-strong);
+  border-radius: var(--radius-lg);
+  z-index: -1;
+}
+
+.privacy-card h3 {
+  margin-bottom: var(--space-4);
+}
+
+.privacy-card p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+/* ── Final CTA Band ──────────────────────────────────────────── */
+.final-cta {
+  padding: var(--space-20) 0;
+}
+
+.final-cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+.landing-footer {
+  margin-top: auto;
+  padding: var(--space-6) 0;
+}
+
+.landing-footer p {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink);
+  opacity: 0.3;
+  padding-top: var(--space-4);
+}
