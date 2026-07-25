@@ -24,7 +24,11 @@ app = FastAPI(title="FinScenario API")
 # Add CORS middleware to allow frontend (React) to connect
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, restrict this to frontend domains
+    allow_origins=[
+        "http://localhost:5173",
+        "https://fin-scenario-taupe.vercel.app",
+        "https://fin-scenario-git-main-nitya-patels-projects.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

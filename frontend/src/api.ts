@@ -46,7 +46,9 @@ export interface ProfileData {
   currency?: string;
 }
 
-const API_BASE_URL = "http://localhost:8000/api";
+const isProd = import.meta.env.PROD;
+const defaultApiUrl = isProd ? "https://finscenario.onrender.com/api" : "http://localhost:8000/api";
+const API_BASE_URL = import.meta.env.VITE_API_URL || defaultApiUrl;
 
 /**
  * Get the current access token from Supabase session.
