@@ -48,7 +48,14 @@ export interface ProfileData {
 
 const isProd = import.meta.env.PROD;
 const defaultApiUrl = isProd ? "https://finscenario.onrender.com/api" : "http://localhost:8000/api";
-const API_BASE_URL = import.meta.env.VITE_API_URL || defaultApiUrl;
+let API_BASE_URL = import.meta.env.VITE_API_URL || defaultApiUrl;
+
+if (API_BASE_URL.endsWith('/')) {
+  API_BASE_URL = API_BASE_URL.slice(0, -1);
+}
+if (!API_BASE_URL.endsWith('/api')) {
+  API_BASE_URL += '/api';
+}
 
 /**
  * Get the current access token from Supabase session.
