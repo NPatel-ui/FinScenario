@@ -17,10 +17,7 @@ export const supabase = createClient(supabaseUrl ?? '', supabaseAnonKey ?? '');
  * Checks VITE_SITE_URL, VITE_VERCEL_URL, and falls back to window.location.origin.
  */
 export const getURL = () => {
-  let url =
-    import.meta.env.VITE_SITE_URL ?? 
-    import.meta.env.VITE_VERCEL_URL ?? 
-    window.location.origin;
+  let url = window.location.origin;
     
   // Make sure to include `http://` or `https://`
   url = url.includes('http') ? url : `https://${url}`;
