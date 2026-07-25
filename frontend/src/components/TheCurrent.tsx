@@ -20,7 +20,7 @@ function wavePath(width: number, fillY: number, time: number, amplitude: number)
                     + Math.sin((i / segments) * Math.PI * 3 + time * 1.3) * (amplitude * 0.5);
     points.push(`${x},${y}`);
   }
-  return `M0,${fillY + amplitude + 10} L${points.map(p => `L${p}`).join(' ')} L${width},${fillY + amplitude + 10} Z`;
+  return `M0,${fillY + amplitude + 10} ${points.map(p => `L${p}`).join(' ')} L${width},${fillY + amplitude + 10} Z`;
 }
 
 const Bubble: React.FC<{ tubeWidth: number; tubeHeight: number; delay: number }> = ({ tubeWidth, tubeHeight, delay }) => {
