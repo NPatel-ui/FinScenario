@@ -98,6 +98,7 @@ const SensitivityChart: React.FC = () => {
                   strokeWidth={2.5}
                   dot={false}
                   activeDot={{ r: 6, fill: '#00C2A8' }}
+                  isAnimationActive={false}
                 />
                 <Line
                   type="monotone"
@@ -107,6 +108,7 @@ const SensitivityChart: React.FC = () => {
                   strokeWidth={2.5}
                   dot={false}
                   activeDot={{ r: 6, fill: '#FF6B5B' }}
+                  isAnimationActive={false}
                 />
               </LineChart>
             </ResponsiveContainer>
