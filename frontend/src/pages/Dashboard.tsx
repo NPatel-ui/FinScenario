@@ -46,8 +46,7 @@ const Dashboard: React.FC = () => {
       navigate(`/scenario/${scenario.id}`);
     } catch (err) {
       console.error("Failed to create scenario:", err);
-      const mockId = Math.random().toString(36).substring(7);
-      navigate(`/scenario/${mockId}`);
+      alert("Failed to create scenario. Is the backend running?");
     }
   };
 
