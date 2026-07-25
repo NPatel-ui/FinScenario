@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { supabase } from '../lib/supabase';
+import { supabase, getURL } from '../lib/supabase';
 import AmbientOrbs from '../components/AmbientOrbs';
 import FloatingLabelInput from '../components/FloatingLabelInput';
 import './Auth.css';
@@ -68,7 +68,7 @@ const Signup: React.FC = () => {
     const { error: authError } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: `${getURL()}/auth/callback`,
       },
     });
     if (authError) {

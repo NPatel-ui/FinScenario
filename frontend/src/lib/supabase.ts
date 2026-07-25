@@ -11,3 +11,21 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 export const supabase = createClient(supabaseUrl ?? '', supabaseAnonKey ?? '');
+
+/**
+ * Returns the best URL to use for redirects.
+ * Checks VITE_SITE_URL, VITE_VERCEL_URL, and falls back to window.location.origin.
+ */
+export const getURL = () => {
+  let url =
+    import.meta.env.VITE_SITE_URL ?? 
+    import.meta.env.VITE_VERCEL_URL ?? 
+    window.location.origin;
+    
+  // Make sure to include `http://` or `https://`
+  url = url.includes('http') ? url : `https://${url}`;
+  // Remove trailing slash if present, so we can cleanly append routes
+  url = url.replace(/\/$/, '');
+  
+  return url;
+};
