@@ -107,3 +107,23 @@ async def update_user_profile(
 @app.get("/health")
 async def health_check():
     return {"status": "ok"}
+
+@app.get("/api/debug/auth")
+async def debug_auth():
+    import os
+    secret = os.environ.get("SUPABASE_JWT_SECRET", "")
+    if not secret:
+        return {"error": "SUPABASE_JWT_SECRET is not set"}
+    
+    # Check if it looks like a JWT (Anon key mistake)
+    looks_like_jwt = secret.startswith("eyJ")
+    
+    masked_secret = secret[:4] + "***" + secret[-4:] if len(secret) > 8 else "***"
+    
+    return {
+        "secret_configured": True,
+        "secret_length": len(secret),
+        "masked_secret": masked_secret,
+        "looks_like_anon_key": looks_like_jwt,
+        "advice": "If looks_like_anon_key is true, you accidentally used the Anon Key. You must use the JWT Secret from Supabase Dashboard -> Project Settings -> API."
+    }
