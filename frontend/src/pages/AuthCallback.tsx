@@ -28,14 +28,14 @@ const AuthCallback: React.FC = () => {
             const profile = await api.getProfile();
             // Check if it's a new profile (e.g. no location or income band)
             if (!profile.location && !profile.income_band && !profile.housing_situation) {
-              if (isMounted) navigate('/onboarding');
+              if (isMounted) navigate('/dashboard');
             } else {
               if (isMounted) navigate('/dashboard');
             }
           } catch (err: any) {
             // If profile fetching fails (e.g. 404), assume new user
             console.warn("Profile fetch failed, assuming new user:", err);
-            if (isMounted) navigate('/onboarding');
+            if (isMounted) navigate('/dashboard');
           }
         } else {
           if (isMounted) navigate('/login');

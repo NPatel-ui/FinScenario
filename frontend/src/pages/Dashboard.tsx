@@ -98,7 +98,12 @@ const Dashboard: React.FC = () => {
       <main className="container dash-main">
         {/* ── Header ── */}
         <motion.header className="dash-header" variants={itemVariants}>
-          <h1>{user?.user_metadata?.first_name ? `${user.user_metadata.first_name}'s scenarios` : 'Your scenarios'}</h1>
+          <h1>
+            {(() => {
+              const name = user?.user_metadata?.first_name || user?.user_metadata?.name?.split(' ')[0] || user?.user_metadata?.full_name?.split(' ')[0];
+              return name ? `${name}'s scenarios` : 'Your scenarios';
+            })()}
+          </h1>
           <p>Pick up where you left off, or start a new comparison.</p>
         </motion.header>
 

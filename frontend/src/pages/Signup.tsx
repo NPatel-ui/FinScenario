@@ -55,7 +55,7 @@ const Signup: React.FC = () => {
         localStorage.setItem('username', firstName.trim());
       }
 
-      navigate('/onboarding');
+      navigate('/dashboard');
     } catch (err: any) {
       setError(err.message || 'An unexpected error occurred');
     } finally {
