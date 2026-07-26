@@ -55,11 +55,32 @@ async def get_current_user_id(
             detail="Token has expired",
             headers={"WWW-Authenticate": "Bearer"},
         )
+    except jwt.InvalidSignatureError:
+        # Supabase JWT secrets are often base64 encoded.
+        import base64
+        try:
+            # Try to decode it as base64 first, then verify again
+            # Pad it if necessary
+            padded_secret = SUPABASE_JWT_SECRET + '=' * (-len(SUPABASE_JWT_SECRET) % 4)
+            decoded_secret = base64.b64decode(padded_secret)
+            payload = jwt.decode(
+                token,
+                decoded_secret,
+                algorithms=["HS256"],
+                options={"verify_aud": False},
+            )
+        except Exception as inner_e:
+            logger.warning(f"Invalid JWT token signature (tried both plain and b64): {inner_e}")
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail=f"Invalid authentication token signature",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
     except jwt.InvalidTokenError as e:
-        logger.warning(f"Invalid JWT token (likely wrong SUPABASE_JWT_SECRET or malformed token): {e}")
+        logger.warning(f"Invalid JWT token (likely malformed token): {e}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid authentication token",
+            detail=f"Invalid authentication token: {str(e)}",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
