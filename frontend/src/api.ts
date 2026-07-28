@@ -84,21 +84,33 @@ export const api = {
   getMe: async () => {
     const headers = await authHeaders();
     const res = await fetch(`${API_BASE_URL}/auth/me`, { headers });
-    if (!res.ok) throw new Error("Failed to get user info");
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("API Error (auth/me):", res.status, err);
+      throw new Error("Failed to get user info");
+    }
     return res.json();
   },
 
   listScenarios: async (): Promise<Scenario[]> => {
     const headers = await authHeaders();
     const res = await fetch(`${API_BASE_URL}/scenarios/`, { headers });
-    if (!res.ok) throw new Error("Failed to fetch scenarios");
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("API Error (listScenarios):", res.status, err);
+      throw new Error("Failed to fetch scenarios");
+    }
     return res.json();
   },
 
   getScenario: async (id: string): Promise<Scenario> => {
     const headers = await authHeaders();
     const res = await fetch(`${API_BASE_URL}/scenarios/${id}`, { headers });
-    if (!res.ok) throw new Error("Failed to fetch scenario");
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("API Error (getScenario):", res.status, err);
+      throw new Error("Failed to fetch scenario");
+    }
     return res.json();
   },
 
@@ -109,7 +121,11 @@ export const api = {
       headers,
       body: JSON.stringify({ type })
     });
-    if (!res.ok) throw new Error("Failed to create scenario");
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("API Error (createScenario):", res.status, err);
+      throw new Error("Failed to create scenario");
+    }
     return res.json();
   },
 
@@ -120,14 +136,22 @@ export const api = {
       headers,
       body: JSON.stringify({ message })
     });
-    if (!res.ok) throw new Error("Failed to send message");
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("API Error (sendMessage):", res.status, err);
+      throw new Error("Failed to send message");
+    }
     return res.json();
   },
 
   getProfile: async (): Promise<ProfileData> => {
     const headers = await authHeaders();
     const res = await fetch(`${API_BASE_URL}/profile`, { headers });
-    if (!res.ok) throw new Error("Failed to fetch profile");
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("API Error (getProfile):", res.status, err);
+      throw new Error("Failed to fetch profile");
+    }
     return res.json();
   },
 
@@ -138,7 +162,11 @@ export const api = {
       headers,
       body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Failed to update profile");
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("API Error (updateProfile):", res.status, err);
+      throw new Error("Failed to update profile");
+    }
     return res.json();
   },
 };
