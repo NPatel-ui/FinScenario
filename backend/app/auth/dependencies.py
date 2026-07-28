@@ -56,13 +56,21 @@ async def get_current_user_id(
             headers={"WWW-Authenticate": "Bearer"},
         )
     except jwt.InvalidSignatureError:
-        # Supabase JWT secrets are often base64 encoded.
+        # Supabase JWT secrets are often base64 encoded, sometimes URL-safe.
         import base64
+        import binascii
         try:
-            # Try to decode it as base64 first, then verify again
-            # Pad it if necessary
-            padded_secret = SUPABASE_JWT_SECRET + '=' * (-len(SUPABASE_JWT_SECRET) % 4)
-            decoded_secret = base64.b64decode(padded_secret)
+            # Clean the secret and pad it if necessary
+            secret_str = SUPABASE_JWT_SECRET.strip()
+            padded_secret = secret_str + '=' * (-len(secret_str) % 4)
+            
+            try:
+                # Try standard base64 first
+                decoded_secret = base64.b64decode(padded_secret, validate=True)
+            except binascii.Error:
+                # Fallback to URL-safe base64
+                decoded_secret = base64.urlsafe_b64decode(padded_secret)
+
             payload = jwt.decode(
                 token,
                 decoded_secret,
