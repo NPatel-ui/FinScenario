@@ -12,6 +12,10 @@ from pydantic import BaseModel
 from typing import Optional, List
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from fastapi import FastAPI, Depends, HTTPException, Request
+from fastapi.responses import JSONResponse
+import traceback
+
 from app.api import scenarios
 from app.auth.dependencies import get_current_user_id
 from app.db.session import get_db
@@ -31,6 +35,16 @@ app.add_middleware(
 )
 
 app.include_router(scenarios.router, prefix="/api/scenarios", tags=["scenarios"])
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Global exception: {exc}")
+    logger.error(traceback.format_exc())
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal Server Error", "error": str(exc), "traceback": traceback.format_exc()},
+        headers={"Access-Control-Allow-Origin": "*"}
+    )
 
 
 # ── Auth endpoints ───────────────────────────────────────────────────────────
