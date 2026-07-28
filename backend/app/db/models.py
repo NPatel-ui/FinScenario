@@ -71,8 +71,8 @@ class ScenarioRow(Base):
     )
     user_id = Column(
         UUID(as_uuid=True),
-        ForeignKey("auth.users.id", ondelete="CASCADE"),  # Supabase-managed table
         nullable=False,
+        comment="References auth.users.id, managed by Supabase",
     )
     type = Column(scenario_type_enum, nullable=False)
     title = Column(Text, nullable=True)
