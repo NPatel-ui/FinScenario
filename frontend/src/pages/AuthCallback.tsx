@@ -8,6 +8,7 @@ import './Auth.css';
 
 const AuthCallback: React.FC = () => {
   const navigate = useNavigate();
+  const [authError, setAuthError] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -33,9 +34,8 @@ const AuthCallback: React.FC = () => {
               if (isMounted) navigate('/dashboard');
             }
           } catch (err: any) {
-            // If profile fetching fails (e.g. 404), assume new user
-            console.warn("Profile fetch failed, assuming new user:", err);
-            if (isMounted) navigate('/dashboard');
+            console.error("Profile fetch failed:", err);
+            if (isMounted) setAuthError(err.message || "Failed to load user profile.");
           }
         } else {
           if (isMounted) navigate('/login');
@@ -71,8 +71,18 @@ const AuthCallback: React.FC = () => {
         transition={{ type: 'spring', stiffness: 150, damping: 20 }}
       >
         <div className="auth-header" style={{ textAlign: 'center', marginTop: 'var(--space-4)', marginBottom: 'var(--space-4)' }}>
-          <h2>Verifying...</h2>
-          <p>Please wait while we complete your sign in.</p>
+          {authError ? (
+            <>
+              <h2 style={{ color: 'var(--red-11)' }}>Authentication Error</h2>
+              <p style={{ color: 'var(--red-11)', marginTop: '8px' }}>{authError}</p>
+              <button className="btn btn-primary" onClick={() => navigate('/login')} style={{ marginTop: '16px' }}>Return to Login</button>
+            </>
+          ) : (
+            <>
+              <h2>Verifying...</h2>
+              <p>Please wait while we complete your sign in.</p>
+            </>
+          )}
         </div>
       </motion.div>
     </motion.div>

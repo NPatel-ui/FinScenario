@@ -32,6 +32,7 @@ const Dashboard: React.FC = () => {
   const { user } = useAuth();
   const [scenarios, setScenarios] = useState<Scenario[]>([]);
   const [loading, setLoading] = useState(true);
+  const [createError, setCreateError] = useState<string | null>(null);
 
   useEffect(() => {
     api.listScenarios()
@@ -41,13 +42,13 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const handleCreateScenario = async (type: ScenarioType) => {
+    setCreateError(null);
     try {
       const scenario = await api.createScenario(type);
       navigate(`/scenario/${scenario.id}`);
-    } catch (err) {
-      console.error("Failed to create scenario, falling back to mock UI:", err);
-      const mockId = Math.random().toString(36).substring(7);
-      navigate(`/scenario/${mockId}`);
+    } catch (err: any) {
+      console.error("Failed to create scenario:", err);
+      setCreateError(err.message || "Something went wrong creating your scenario. Please try again.");
     }
   };
 
@@ -111,6 +112,11 @@ const Dashboard: React.FC = () => {
         {/* ── New Scenario Tiles (Bento) ── */}
         <motion.div className="new-scenario-section" variants={itemVariants}>
           <span className="section-label">START NEW</span>
+          {createError && (
+            <div className="error-banner" style={{ background: 'var(--red-10)', color: 'var(--red-11)', padding: '12px', borderRadius: '8px', marginBottom: '16px' }}>
+              {createError}
+            </div>
+          )}
           <div className="scenario-tiles">
             {scenarioTypes.map((st) => (
               <TiltCard

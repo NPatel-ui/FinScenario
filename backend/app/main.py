@@ -25,11 +25,17 @@ logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(title="FinScenario API")
 
+allowed_origins = [
+    "http://localhost:5173",
+    os.environ.get("FRONTEND_URL", "https://fin-scenario-taupe.vercel.app").rstrip("/"),
+]
+logger.info(f"CORS allowed origins: {allowed_origins}")
+
 # Add CORS middleware to allow frontend (React) to connect
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -76,7 +82,13 @@ async def get_user_profile(
     """Fetch the authenticated user's profile."""
     profile = await get_profile(db, user_id)
     if not profile:
-        raise HTTPException(status_code=404, detail="Profile not found")
+        # Create an empty profile on the fly for edge cases where the DB trigger didn't run
+        from app.db.models import Profile
+        import uuid
+        profile = Profile(id=uuid.UUID(user_id))
+        db.add(profile)
+        await db.commit()
+        await db.refresh(profile)
     return {
         "id": str(profile.id),
         "location": profile.location,
