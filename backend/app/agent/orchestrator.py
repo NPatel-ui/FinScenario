@@ -232,7 +232,10 @@ def process_message(scenario: dict, user_text: str) -> Tuple[dict, str]:
 
     except Exception as e:
         logger.error(f"Error communicating with Gemini: {e}", exc_info=True)
-        agent_text = "I'm sorry, I encountered an error processing your request."
+        if "401 UNAUTHENTICATED" in str(e) or "API key not valid" in str(e) or "API_KEY_INVALID" in str(e):
+            agent_text = "System error: The Gemini API key configured in the backend is invalid or missing. Please check the GEMINI_API_KEY in your .env file."
+        else:
+            agent_text = "I'm sorry, I encountered an error processing your request."
 
     # Update scenario conversation
     scenario.setdefault("conversation", [])
