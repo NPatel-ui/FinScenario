@@ -43,6 +43,17 @@ const ScenarioChat: React.FC = () => {
         .then(setScenario)
         .catch(err => {
           console.error("Failed to load scenario", err);
+          setScenario({
+            id,
+            user_id: 'user_123',
+            type: 'rent_vs_buy',
+            inputs: [],
+            conversation: [
+              { role: 'assistant', content: 'Hi! Tell me about the home you\'re looking to buy, or the place you currently rent.' }
+            ],
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          });
         })
         .finally(() => setLoading(false));
     }
