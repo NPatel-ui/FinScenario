@@ -76,7 +76,7 @@ async def get_current_user_id(
         except Exception as inner_e:
             logger.error(f"JWT signature verification failed with base64 too: {inner_e}. Bypassing signature verification to unblock frontend. PLEASE FIX SUPABASE_JWT_SECRET!")
             # 3. Last resort fallback for prototyping so the user isn't blocked by misconfigured Render environments
-            payload = jwt.decode(token, options={"verify_signature": False, "verify_aud": False})
+            payload = jwt.decode(token, algorithms=["HS256"], options={"verify_signature": False, "verify_aud": False})
     except jwt.ExpiredSignatureError:
         logger.warning("JWT token has expired")
         raise HTTPException(
@@ -93,7 +93,7 @@ async def get_current_user_id(
         )
     except Exception as e:
         logger.error(f"JWT decoding failed, bypassing signature verification: {e}")
-        payload = jwt.decode(token, options={"verify_signature": False, "verify_aud": False})
+        payload = jwt.decode(token, algorithms=["HS256"], options={"verify_signature": False, "verify_aud": False})
 
     user_id = payload.get("sub")
     if not user_id:
