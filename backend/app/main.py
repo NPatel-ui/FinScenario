@@ -22,6 +22,7 @@ from app.db.session import get_db
 from app.db.store import get_profile, update_profile
 
 logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="FinScenario API")
 
